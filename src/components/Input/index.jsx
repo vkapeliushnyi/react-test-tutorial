@@ -1,18 +1,6 @@
-import { useState } from "react";
-import { addTodosRequest } from "../Fetchs";
 import { TextField } from "@mui/material";
 
-function Input({ setTodos }) {
-  const [inputValue, setInputValue] = useState("");
-  const addTodos = (ev) => {
-    if (ev.keyCode === 13) {
-      addTodosRequest(inputValue).then((data) =>
-        setTodos((prevState) => [...prevState, data])
-      );
-      setInputValue("");
-    }
-  };
-
+function Input({ inputValue, addTodos, setInputValue }) {
   return (
     <TextField
       id="outlined-basic"
@@ -21,6 +9,7 @@ function Input({ setTodos }) {
       type="text"
       size="small"
       margin="normal"
+      autoComplete="off"
       sx={{ display: "grid" }}
       value={inputValue}
       onChange={(ev) => setInputValue(ev.target.value)}
