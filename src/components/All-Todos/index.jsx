@@ -1,28 +1,40 @@
-import {
-  IconButton,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  Checkbox,
-  ListItemText,
-} from "@mui/material";
+import { IconButton, ListItem, Checkbox } from "@mui/material";
 import { Delete } from "@mui/icons-material/";
 import { useState, useEffect } from "react";
-import { showAllTodos, delTodos, checkedTodosRequest } from "../Fetchs";
+import {
+  showAllTodos,
+  delTodos,
+  checkedTodosRequest,
+  addTodosRequest,
+} from "../Fetchs";
 import AddButton from "../Footer";
 import Input from "../Input";
-
 export function AllTodos() {
   const [todos, setTodos] = useState([]);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    showAllTodos().then((data) => setTodos(data));
+    showAllTodos().then(setTodos);
     return () => {};
   }, []);
 
+  const addTodos = (ev) => {
+    if ((ev.keyCode === 13 || Number.isInteger(ev.button)) && inputValue) {
+      addTodosRequest(inputValue).then((data) =>
+        setTodos((prevState) => [...prevState, data])
+      );
+
+      setInputValue("");
+    }
+  };
+
   return (
     <>
-      <Input setTodos={setTodos} />
+      <Input
+        addTodos={addTodos}
+        setInputValue={setInputValue}
+        inputValue={inputValue}
+      />
 
       {todos.map(({ id, title, done }) => (
         <ListItem
@@ -58,7 +70,7 @@ export function AllTodos() {
         </ListItem>
       ))}
 
-      <AddButton setTodos={setTodos} />
+      <AddButton addTodos={addTodos} />
     </>
   );
 }

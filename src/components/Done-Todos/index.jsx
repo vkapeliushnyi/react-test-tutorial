@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { showDoneTodos, checkedTodosRequest, delTodos } from "../Fetchs";
+import { IconButton, ListItem, Checkbox } from "@mui/material";
+import { Delete } from "@mui/icons-material/";
 
 function DoneTodos() {
   const [doneTodos, setDoneTodos] = useState([]);
@@ -9,35 +11,41 @@ function DoneTodos() {
   }, []);
 
   return (
-    <ul>
-      <li>
-        {doneTodos.map(({ id, title, done }) => (
-          <li key={id}>
-            <label>
-              <input
-                defaultChecked={done}
-                type="checkbox"
-                onChange={(event) => {
-                  checkedTodosRequest(id, done, event);
-                }}
-              />
-              {title}
-              <button
-                onClick={() =>
-                  delTodos(id).then(() =>
-                    setDoneTodos((prevState) =>
-                      prevState.filter((el) => id !== el.id)
-                    )
+    <>
+      {doneTodos.map(({ id, title, done }) => (
+        <ListItem
+          key={id}
+          secondaryAction={
+            <IconButton
+              edge="end"
+              aria-label="comments"
+              onClick={() =>
+                delTodos(id).then(() =>
+                  setDoneTodos((prevState) =>
+                    prevState.filter((el) => id !== el.id)
                   )
-                }
-              >
-                Delete
-              </button>
-            </label>
-          </li>
-        ))}
-      </li>
-    </ul>
+                )
+              }
+            >
+              <Delete />
+            </IconButton>
+          }
+          disablePadding
+        >
+          <Checkbox
+            edge="start"
+            tabIndex={-1}
+            disableRipple
+            defaultChecked={done}
+            type="checkbox"
+            onChange={(event) => {
+              checkedTodosRequest(id, event);
+            }}
+          />
+          {title}
+        </ListItem>
+      ))}
+    </>
   );
 }
 

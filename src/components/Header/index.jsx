@@ -2,16 +2,14 @@ import { Link } from "react-router-dom";
 import { Button, Stack } from "@mui/material/";
 function Header() {
   return (
-    <header>
-      <Stack spacing={3} direction="row">
-        <Button variant="contained" href="/">
-          All Todos
-        </Button>
-        <Button variant="contained" href="/done">
-          Done Todos
-        </Button>
-      </Stack>
-    </header>
+    <Stack spacing={3} direction="row">
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <Button variant="contained">All Todos</Button>
+      </Link>
+      <Link to="/done" style={{ textDecoration: "none" }}>
+        <Button variant="contained">Done Todos</Button>{" "}
+      </Link>
+    </Stack>
   );
 }
 

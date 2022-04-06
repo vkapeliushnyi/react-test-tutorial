@@ -2,7 +2,7 @@
   "todos": [
     {
       "title": "Купить Рево",
-      "done": false,
+      "done": true,
       "id": 1
     },
     {
@@ -11,24 +11,14 @@
       "id": 2
     },
     {
-      "title": "Апнуть званку",
-      "done": true,
-      "id": 3
-    },
-    {
       "title": "Выучить TypeScript",
-      "done": false,
+      "done": true,
       "id": 4
     },
     {
       "title": "Выпить пиво ",
       "done": true,
       "id": 5
-    },
-    {
-      "title": "Поесть пельмени",
-      "done": false,
-      "id": 6
     }
   ]
 }
