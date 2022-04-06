@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
+import { Button, Stack } from "@mui/material/";
 function Header() {
   return (
     <header>
-      <h1>
-        <Link to="/"> All Todos </Link>
-      </h1>
-      <h1>
-        <Link to="/done"> Done Todos </Link>
-      </h1>
+      <Stack spacing={3} direction="row">
+        <Button variant="contained" href="/">
+          All Todos
+        </Button>
+        <Button variant="contained" href="/done">
+          Done Todos
+        </Button>
+      </Stack>
     </header>
   );
 }

@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { showDoneTodos, checkedTodosRequest, delTodos } from "../Fetchs";
 
 function DoneTodos() {
   const [doneTodos, setDoneTodos] = useState([]);
-  fetch(`http://localhost:4000/todos?done=true`)
-    .then((data) => data.json())
-    .then((data) => setDoneTodos(data));
+  useEffect(() => {
+    showDoneTodos().then((data) => setDoneTodos(data));
+    return () => {};
+  }, []);
+
   return (
     <ul>
       <li>
@@ -15,21 +18,13 @@ function DoneTodos() {
                 defaultChecked={done}
                 type="checkbox"
                 onChange={(event) => {
-                  fetch(`http://localhost:4000/todos/${id}`, {
-                    method: "PATCH",
-                    body: JSON.stringify({ done: event.target.checked }),
-                    headers: {
-                      "Content-Type": "application/json; charset=UTF-8",
-                    },
-                  });
+                  checkedTodosRequest(id, done, event);
                 }}
               />
               {title}
               <button
                 onClick={() =>
-                  fetch(`http://localhost:4000/todos/${id}`, {
-                    method: "DELETE",
-                  }).then(() =>
+                  delTodos(id).then(() =>
                     setDoneTodos((prevState) =>
                       prevState.filter((el) => id !== el.id)
                     )
