@@ -7,7 +7,6 @@ function DoneTodos() {
   const [doneTodos, setDoneTodos] = useState([]);
   useEffect(() => {
     showDoneTodos().then((data) => setDoneTodos(data));
-    return () => {};
   }, []);
 
   return (
@@ -19,6 +18,7 @@ function DoneTodos() {
             <IconButton
               edge="end"
               aria-label="comments"
+              //TODO: make onClick callback a separate function
               onClick={() =>
                 delTodos(id).then(() =>
                   setDoneTodos((prevState) =>

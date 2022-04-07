@@ -1,4 +1,5 @@
 // import { React, useState } from "react";
+//TODO: rename folder and file for their purpose
 import { Button } from "@mui/material";
 import { Send } from "@mui/icons-material/";
 

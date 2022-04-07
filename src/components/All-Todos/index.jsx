@@ -15,7 +15,6 @@ export function AllTodos() {
 
   useEffect(() => {
     showAllTodos().then(setTodos);
-    return () => {};
   }, []);
 
   const addTodos = (ev) => {
